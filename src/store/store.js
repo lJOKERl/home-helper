@@ -12,10 +12,14 @@ const store = new Vuex.Store({
 		dishes: [],
 		categories: ['все', 'овощи', 'мясо', 'фрукты'],
 		category: 'овощи',
+		loading: true,
 	},
 	getters: {
 		GET_PRODUCTS_LENGTH(state) {
 			return state.products.length
+		},
+		GET_LOADING_STATUS(state) {
+			return state.isLoading
 		},
 	},
 	mutations: {
@@ -25,20 +29,27 @@ const store = new Vuex.Store({
 		SET_DISHES(state, payload) {
 			state.dishes = payload.reverse()
 		},
+		IS_LOADING(state, payload) {
+			state.isLoading = payload
+		},
 	},
 	actions: {
 		async GET_PRODUCTS({ commit }) {
 			try {
+				commit('IS_LOADING', true)
 				let { data } = await axios.get(baseURL + 'products')
 				commit('SET_PRODUCTS', data)
+				commit('IS_LOADING', false)
 			} catch (error) {
 				console.error('Ошибка в [GET_PRODUCTS]: ' + error.message)
 			}
 		},
 		async GET_DISHES({ commit }) {
 			try {
+				commit('IS_LOADING', true)
 				let { data } = await axios.get(baseURL + 'dishes')
 				commit('SET_DISHES', data)
+				commit('IS_LOADING', false)
 			} catch (error) {
 				console.error('Ошибка в [GET_DISHES]: ' + error.message)
 			}

@@ -10,6 +10,11 @@
 				<router-link class="nav-link" to="/add">Добавить блюдо</router-link>
 			</li>
 			<li class="nav-item">
+				<router-link class="nav-link" to="/add-product"
+					>Добавить продукт</router-link
+				>
+			</li>
+			<li class="nav-item">
 				<router-link class="nav-link" to="/menu">Список блюд</router-link>
 			</li>
 		</ul>

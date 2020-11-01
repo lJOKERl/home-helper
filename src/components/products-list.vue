@@ -1,14 +1,28 @@
 <template>
 	<div>
-		<ul class="list-group  my-3">
+		<div
+			v-if="!products.length"
+			class="alert alert-light mt-3 text-center"
+			role="alert"
+		>
+			<b-icon icon="bag-x" font-scale="1.5"> </b-icon> В списке нет продуктов.
+			Вы можете их добавить.
+		</div>
+
+		<ul v-else class="list-group my-3">
 			<li
 				v-for="product in products"
 				:class="{ done: product.completed }"
 				:key="product.id"
 				class="list-group-item d-flex justify-content-between align-items-center"
 			>
-				<span>{{ product.title }}</span>
-				<span>
+				<div>
+					<h6>{{ product.title }}</h6>
+					<small class="badge badge-pill badge-light"
+						>{{ product.measure }} | {{ product.category }}</small
+					>
+				</div>
+				<div>
 					{{ product.price }} &#8381;
 					<b-icon
 						icon="trash"
@@ -17,18 +31,19 @@
 						@click="DELETE_PRODUCT(product.id)"
 					>
 					</b-icon>
-				</span>
+				</div>
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script>
-	import { mapState, mapActions } from 'vuex'
+	import { mapState, mapActions, mapGetters } from 'vuex'
 	export default {
 		name: 'productsList',
 		computed: {
 			...mapState(['products']),
+			...mapGetters(['GET_LOADING_STATUS']),
 		},
 		methods: {
 			...mapActions(['DELETE_PRODUCT']),
@@ -44,5 +59,9 @@
 
 	.trash_icon {
 		cursor: pointer;
+	}
+
+	.badge {
+		font-weight: normal;
 	}
 </style>

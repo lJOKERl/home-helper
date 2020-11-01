@@ -1,10 +1,12 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import addProduct from '@/components/add-product.vue';
-import listOfDishes from '@/components/list-of-dishes.vue';
-import addNewDish from '@/components/add-new-dish.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-Vue.use(VueRouter);
+import home from '@/components/home.vue'
+import addProduct from '@/components/add-product.vue'
+import listOfDishes from '@/components/list-of-dishes.vue'
+import addNewDish from '@/components/add-new-dish.vue'
+
+Vue.use(VueRouter)
 
 export const router = new VueRouter({
 	base: '/',
@@ -12,6 +14,10 @@ export const router = new VueRouter({
 	routes: [
 		{
 			path: '/',
+			component: home,
+		},
+		{
+			path: '/add-product',
 			component: addProduct,
 		},
 		{
@@ -23,4 +29,4 @@ export const router = new VueRouter({
 			component: addNewDish,
 		},
 	],
-});
+})
