@@ -1,109 +1,197 @@
 {
-	"products": [
-		{
-			"title": "Картофель",
-			"price": "35",
-			"measure": "кг",
-			"category": "овощи",
-			"id": 1
-		},
-		{
-			"title": "Лук",
-			"price": "25",
-			"measure": "кг",
-			"category": "овощи",
-			"id": 2
-		},
-		{
-			"title": "Морковь",
-			"price": "20",
-			"measure": "кг",
-			"category": "овощи",
-			"id": 3
-		},
-		{
-			"title": "Томатная паста 140 гр",
-			"price": "79",
-			"measure": "шт",
-			"category": "консервы",
-			"id": 4
-		},
-		{
-			"title": "Сметана 260 гр",
-			"price": "67",
-			"measure": "шт",
-			"category": "молочка",
-			"id": 5
-		},
-		{
-			"title": "Рис",
-			"price": "110",
-			"measure": "уп",
-			"category": "крупы",
-			"id": 6
-		},
-		{
-			"title": "Куриная голень 900 гр",
-			"price": "180",
-			"measure": "уп",
-			"category": "мясо",
-			"id": 7
-		},
-		{
-			"title": "Свинина",
-			"price": "500",
-			"measure": "кг",
-			"category": "мясо",
-			"id": 8
-		},
-		{
-			"title": "Говядина",
-			"price": "600",
-			"measure": "кг",
-			"category": "мясо",
-			"id": 9
-		}
-	],
-	"categories": [
-		{
-			"id": 1,
-			"title": "мясо"
-		},
-		{
-			"id": 2,
-			"title": "овощи"
-		},
-		{
-			"id": 3,
-			"title": "крупы"
-		},
-		{
-			"id": 4,
-			"title": "мясо"
-		},
-		{
-			"id": 5,
-			"title": "мясо"
-		}
-	],
-	"dishes": [
-		{
-			"id": 1,
-			"title": "Борщ",
-			"image": "http://prigotovim.org/uploads/posts/2011-04/1303986975_krasnyjj-borshh.jpg",
-			"ingredients": [1, 2, 3, 4]
-		},
-		{
-			"id": 2,
-			"title": "Харчо",
-			"image": "http://prigotovim.org/uploads/posts/2012-11/1352464533_top.jpg",
-			"ingredients": [3, 4]
-		},
-		{
-			"id": 3,
-			"title": "Уха",
-			"image": "http://prigotovim.org/uploads/posts/2013-09/1378814965_top.jpg",
-			"ingredients": [1, 2]
-		}
-	]
+  "products": [
+    {
+      "title": "Картофель",
+      "price": "35",
+      "measure": "кг",
+      "category": "овощи",
+      "id": 1
+    },
+    {
+      "title": "Лук",
+      "price": "25",
+      "measure": "кг",
+      "category": "овощи",
+      "id": 2
+    },
+    {
+      "title": "Морковь",
+      "price": "20",
+      "measure": "кг",
+      "category": "овощи",
+      "id": 3
+    },
+    {
+      "title": "Томатная паста 140 гр",
+      "price": "79",
+      "measure": "шт",
+      "category": "консервы",
+      "id": 4
+    },
+    {
+      "title": "Сметана 260 гр",
+      "price": "67",
+      "measure": "шт",
+      "category": "молочка",
+      "id": 5
+    },
+    {
+      "title": "Рис",
+      "price": "110",
+      "measure": "уп",
+      "category": "крупы",
+      "id": 6
+    },
+    {
+      "title": "Куриная голень 900 гр",
+      "price": "180",
+      "measure": "уп",
+      "category": "мясо",
+      "id": 7
+    },
+    {
+      "title": "Свинина",
+      "price": "500",
+      "measure": "кг",
+      "category": "мясо",
+      "id": 8
+    },
+    {
+      "title": "Говядина",
+      "price": "600",
+      "measure": "кг",
+      "category": "мясо",
+      "id": 9
+    },
+    {
+      "title": "Творог",
+      "price": "85",
+      "measure": "шт",
+      "category": "молочка",
+      "id": 10
+    },
+    {
+      "title": "Тунец",
+      "price": "120",
+      "measure": "шт",
+      "category": "консервы",
+      "id": 13
+    },
+    {
+      "title": "Тушенка",
+      "price": "155",
+      "measure": "шт",
+      "category": "консервы",
+      "id": 14
+    },
+    {
+      "title": "Чеснок",
+      "price": "320",
+      "measure": "кг",
+      "category": "овощи",
+      "id": 15
+    },
+    {
+      "title": "rr",
+      "price": "33",
+      "measure": "шт",
+      "category": "овощи",
+      "id": 16
+    },
+    {
+      "title": "asf",
+      "price": "22",
+      "measure": "шт",
+      "category": "овощи",
+      "id": 17
+    },
+    {
+      "title": "eee",
+      "price": "33",
+      "measure": "шт",
+      "category": "овощи",
+      "id": 18
+    },
+    {
+      "title": "TEST",
+      "price": "33",
+      "measure": "шт",
+      "category": "овощи",
+      "id": 19
+    },
+    {
+      "title": "TEST2",
+      "price": "23",
+      "measure": "шт",
+      "category": "овощи",
+      "id": 20
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "мясо"
+    },
+    {
+      "id": 2,
+      "title": "овощи"
+    },
+    {
+      "id": 3,
+      "title": "крупы"
+    },
+    {
+      "id": 4,
+      "title": "консервы"
+    },
+    {
+      "id": 5,
+      "title": "молочка"
+    }
+  ],
+  "measuares": [
+    {
+      "id": 1,
+      "title": "шт"
+    },
+    {
+      "id": 2,
+      "title": "кг"
+    },
+    {
+      "id": 3,
+      "title": "уп"
+    }
+  ],
+  "dishes": [
+    {
+      "id": 1,
+      "title": "Борщ",
+      "image": "http://prigotovim.org/uploads/posts/2011-04/1303986975_krasnyjj-borshh.jpg",
+      "ingredients": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Харчо",
+      "image": "http://prigotovim.org/uploads/posts/2012-11/1352464533_top.jpg",
+      "ingredients": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Уха",
+      "image": "http://prigotovim.org/uploads/posts/2013-09/1378814965_top.jpg",
+      "ingredients": [
+        1,
+        2
+      ]
+    }
+  ]
 }

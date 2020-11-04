@@ -15,8 +15,6 @@
 					autocomplete="off"
 					placeholder=""
 				/>
-
-				<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 			</div>
 			<div class="form-group">
 				<label for="formPrice">Стоимость</label>
@@ -33,42 +31,33 @@
 				/>
 			</div>
 
+			<div class="form-group">
+				<label for="formCat">Категория</label>
+				<select id="formCat" class="form-control" v-model="category">
+					<option v-for="cat in CATEGORIES" :key="cat.id">
+						{{ cat.title }}
+					</option>
+				</select>
+			</div>
+
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="btn-group " role="group" aria-label="Basic example">
 					<button
+						v-for="item in MEASUARES"
+						:key="item.id"
 						type="button"
 						class="btn btn-outline-secondary"
-						value="шт"
+						:class="{ active: measure == item.title }"
+						:value="item.title"
 						@click="addMeasure"
 					>
-						шт
-					</button>
-					<button
-						type="button"
-						class="btn btn-outline-secondary"
-						value="кг"
-						@click="addMeasure"
-					>
-						кг
-					</button>
-					<button
-						type="button"
-						class="btn btn-outline-secondary"
-						value="уп"
-						@click="addMeasure"
-					>
-						уп
+						{{ item.title }}
 					</button>
 				</div>
 
-				<button
-					type="submit"
-					class="btn btn-primary"
-					@click="ADD_PRODUCT({ title, price, measure })"
+				<b-button variant="success" pill @click="sentForm"
+					><b-icon icon="plus" class=""></b-icon>Добавить</b-button
 				>
-					<b-icon icon="plus"> </b-icon>
-					Добавить
-				</button>
 			</div>
 		</form>
 
@@ -77,7 +66,7 @@
 </template>
 
 <script>
-	import { mapState, mapActions } from 'vuex'
+	import { mapGetters, mapActions } from 'vuex'
 	import productsList from '@/components/products-list.vue'
 
 	export default {
@@ -87,23 +76,30 @@
 				title: '',
 				price: null,
 				measure: 'шт',
+				category: 'овощи',
 			}
 		},
 		components: {
 			productsList,
 		},
 		computed: {
-			...mapState(['products']),
+			...mapGetters(['PRODUCTS', 'CATEGORIES', 'MEASUARES']),
 		},
 		methods: {
 			...mapActions(['ADD_PRODUCT', 'GET_PRODUCTS']),
 			addMeasure(event) {
 				this.measure = event.target.value
 			},
-			clearForm() {
+			async sentForm() {
+				await this.ADD_PRODUCT({
+					title: this.title,
+					price: this.price,
+					measure: this.measure,
+					category: this.category,
+				})
+
 				this.title = ''
 				this.price = ''
-				this.measure = ''
 			},
 		},
 		watch: {
