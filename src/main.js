@@ -5,12 +5,14 @@ import VueRouter from 'vue-router'
 import store from './store/store'
 import { router } from './router'
 import firebase from 'firebase'
+import Vuelidate from 'vuelidate'
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(Vuex)
 Vue.use(VueRouter)
+Vue.use(Vuelidate)
 
 import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 

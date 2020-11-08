@@ -7,17 +7,27 @@
 						Главная
 					</router-link>
 				</li>
-				<li class="nav-item">
+				<!-- <li class="nav-item">
 					<router-link class="nav-link" to="/add">Добавить блюдо</router-link>
-				</li>
+				</li> -->
 				<li class="nav-item">
 					<router-link class="nav-link" to="/add-product"
 						>Список продуктов</router-link
 					>
 				</li>
 				<li class="nav-item">
-					<router-link class="nav-link" to="/menu">Список блюд</router-link>
+					<router-link class="nav-link" to="/add-category"
+						>Категории</router-link
+					>
 				</li>
+				<li class="nav-item">
+					<router-link class="nav-link" to="/add-measure">
+						Ед.измерения</router-link
+					>
+				</li>
+				<!-- <li class="nav-item">
+					<router-link class="nav-link" to="/menu">Список блюд</router-link>
+				</li> -->
 			</template>
 			<template v-else>
 				<li class="nav-item">

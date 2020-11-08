@@ -1,41 +1,46 @@
 <template>
 	<div>
-		<h3>Добавление продукта</h3>
+		<h4>Добавление продукта</h4>
 
-		<form @submit.prevent="">
+		<form @submit.prevent="send">
 			<div class="form-group">
-				<label for="formTitle">Наименование</label>
 				<input
 					type="text"
-					ref="title"
-					required
-					id="formTitle"
-					v-model.trim="title"
+					v-model.trim="$v.title.$model"
 					class="form-control"
 					autocomplete="off"
-					placeholder=""
+					:class="{ 'is-invalid': $v.title.$error }"
+					placeholder="Наименование"
 				/>
+				<div class="invalid-feedback" v-if="!$v.title.required">
+					Введите название
+				</div>
+				<div class="invalid-feedback" v-if="!$v.title.minLength">
+					Введите более {{ $v.title.$params.minLength.min - 1 }}-х символов
+				</div>
 			</div>
 			<div class="form-group">
-				<label for="formPrice">Стоимость</label>
 				<input
 					type="number"
-					ref="price"
-					required
-					id="formPrice"
-					v-model.trim="price"
+					v-model.trim="$v.price.$model"
 					class="form-control"
 					autocomplete="off"
-					draggable=""
-					placeholder=""
+					:class="{ 'is-invalid': $v.price.$error }"
+					placeholder="Стоимость"
 				/>
+				<div class="invalid-feedback" v-if="!$v.price.required">
+					Введите цену
+				</div>
+				<div class="invalid-feedback" v-if="!$v.price.numeric">
+					Только числа
+				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="formCat">Категория</label>
 				<select id="formCat" class="form-control" v-model="category">
-					<option v-for="cat in CATEGORIES" :key="cat.id">
-						{{ cat.title }}
+					<option value="category" disabled>Выберите категорию:</option>
+					<option v-for="category in CATEGORIES" :key="category.id">
+						{{ category.title }}
 					</option>
 				</select>
 			</div>
@@ -43,7 +48,7 @@
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="btn-group " role="group" aria-label="Basic example">
 					<button
-						v-for="item in MEASUARES"
+						v-for="item in MEASURES"
 						:key="item.id"
 						type="button"
 						class="btn btn-outline-secondary"
@@ -55,7 +60,7 @@
 					</button>
 				</div>
 
-				<b-button variant="success" pill @click="sentForm"
+				<b-button variant="success" pill type="submit"
 					><b-icon icon="plus" class=""></b-icon>Добавить</b-button
 				>
 			</div>
@@ -68,6 +73,7 @@
 <script>
 	import { mapGetters, mapActions } from 'vuex'
 	import productsList from '@/components/products-list.vue'
+	import { required, minLength, numeric } from 'vuelidate/lib/validators'
 
 	export default {
 		name: 'addProduct',
@@ -77,35 +83,55 @@
 				price: null,
 				measure: 'шт',
 				category: 'овощи',
+				len: 4,
 			}
+		},
+		validations: {
+			title: {
+				required,
+				minLength: minLength(3),
+			},
+			price: {
+				required,
+				numeric,
+			},
 		},
 		components: {
 			productsList,
 		},
 		computed: {
-			...mapGetters(['PRODUCTS', 'CATEGORIES', 'MEASUARES']),
+			...mapGetters(['PRODUCTS', 'CATEGORIES', 'MEASURES']),
 		},
 		methods: {
 			...mapActions(['ADD_PRODUCT', 'GET_PRODUCTS']),
 			addMeasure(event) {
 				this.measure = event.target.value
 			},
-			async sentForm() {
-				await this.ADD_PRODUCT({
-					title: this.title,
-					price: this.price,
-					measure: this.measure,
-					category: this.category,
-				})
+			clearForm() {
+				this.curentID = null
+				this.title = null
+				this.price = null
+				this.measure = null
+			},
+			send() {
+				if (!this.$v.title.$invalid) {
+					this.ADD_PRODUCT({
+						title: this.title,
+						price: this.price,
+						measure: this.measure,
+						category: this.category,
+					})
+					this.clearForm()
+					this.$v.$reset()
+				}
 
-				this.title = ''
-				this.price = ''
+				return
 			},
 		},
 		watch: {
 			price() {
 				if (this.price < 0) {
-					this.price = this.price * -1
+					this.price = null
 				}
 			},
 		},

@@ -1,43 +1,34 @@
 <template>
-	<div class="container" id="app">
-		<top-menu />
-		<router-view></router-view>
+	<div>
+		<navbar />
+		<div class="container" id="app">
+			<router-view></router-view>
+		</div>
 	</div>
 </template>
 
 <script>
 	import 'bootstrap/dist/css/bootstrap.css'
 	import 'bootstrap-vue/dist/bootstrap-vue.css'
-	import topMenu from '@/components/top-menu.vue'
+	import navbar from '@/components/Common/navbar.vue'
 	import { mapActions, mapGetters } from 'vuex'
 
 	export default {
 		name: 'App',
 		components: {
-			topMenu,
+			// topMenu,
+			navbar,
 		},
 		methods: {
-			...mapActions(['GET_PRODUCTS', 'GET_CATEGORIES', 'GET_MEASUARES']),
+			...mapActions(['GET_PRODUCTS', 'GET_CATEGORIES', 'GET_MEASURES']),
 		},
 		computed: {
 			...mapGetters(['USER']),
 		},
 		mounted() {
 			this.GET_PRODUCTS()
-			this.GET_MEASUARES()
 			this.GET_CATEGORIES()
-			// console.log(this.USER)
-			// if (!this.USER) {
-			// 	this.$router.push('/login')
-			// }
-			// 			rules_version = '2';
-			// service cloud.firestore {
-			//   match /databases/{database}/documents {
-			//     match /{document=**} {
-			//       allow read, write;
-			//     }
-			//   }
-			// }
+			this.GET_MEASURES()
 		},
 	}
 </script>
@@ -45,5 +36,19 @@
 <style>
 	body {
 		background: #eee !important;
+	}
+	.container {
+		max-width: 768px !important;
+	}
+	/* input {
+		background: #555 !important;
+	}
+	li {
+		background: #555 !important;
+	} */
+	@media (max-width: 600px) {
+		.show-icon {
+			display: none;
+		}
 	}
 </style>
