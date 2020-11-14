@@ -8,6 +8,9 @@ export default {
 	PUSH_MEASURE(state, payload) {
 		state.measures.push(payload)
 	},
+	PUSH_DISH(state, payload) {
+		state.dishes.push(payload)
+	},
 	PUT_PRODUCT(state, payload) {
 		let product = state.products.find((el) => el.id === payload.id)
 
@@ -32,6 +35,9 @@ export default {
 	SET_PRODUCTS(state, payload) {
 		state.products = payload
 	},
+	SET_DISHES(state, payload) {
+		state.dishes = payload
+	},
 	DELETE_PRODUCT_BY_ID(state, id) {
 		let newArr = state.products.filter((el) => el.id !== id)
 		state.products = newArr
@@ -43,9 +49,6 @@ export default {
 	DELETE_MEASURE_BY_ID(state, id) {
 		let newArr = state.measures.filter((el) => el.id !== id)
 		state.measures = newArr
-	},
-	SET_DISHES(state, payload) {
-		state.dishes = payload.reverse()
 	},
 	SET_USER(state, payload) {
 		state.user = payload

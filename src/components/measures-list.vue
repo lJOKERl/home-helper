@@ -53,7 +53,7 @@
 				<h5 class="text-center">{{ title }}</h5>
 
 				<p class="text-center text-danger">
-					Действительно хотите удалить категорию?
+					Действительно хотите удалить ед.измерения?
 				</p>
 			</template>
 			<template v-slot:footer>

@@ -10,6 +10,16 @@
 
 				<!-- Right aligned nav items -->
 				<b-navbar-nav class="ml-auto">
+					<li class="nav-item">
+						<router-link class="nav-link" to="/add-new-dish"
+							>Добавить блюдо</router-link
+						>
+					</li>
+					<li class="nav-item">
+						<router-link class="nav-link" to="/list-of-dishes"
+							>Список блюд</router-link
+						>
+					</li>
 					<b-nav-item-dropdown right>
 						<!-- Using 'button-content' slot -->
 						<template #button-content>

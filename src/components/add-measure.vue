@@ -41,6 +41,7 @@
 			return {
 				title: null,
 				curentID: null,
+				number: null,
 			}
 		},
 		validations: {
@@ -59,9 +60,16 @@
 			...mapActions(['ADD_MEASURE']),
 			sendForm() {
 				if (!this.$v.title.$invalid) {
+					if (this.title == 'шт' || this.title == 'уп') {
+						this.number = 1
+					} else {
+						this.number = 50
+					}
+
 					this.ADD_MEASURE({
 						id: this.curentID,
 						title: this.title,
+						number: this.number,
 					})
 					this.clearForm()
 					this.$v.$reset()

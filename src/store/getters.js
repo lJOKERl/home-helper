@@ -4,4 +4,5 @@ export default {
 	USER: (state) => state.user,
 	CATEGORIES: (state) => state.categories,
 	MEASURES: (state) => state.measures,
+	DISHES: (state) => state.dishes,
 }

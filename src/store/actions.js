@@ -67,6 +67,28 @@ export default {
 			console.error('Ошибка в [GET_MEASURES]: ' + error.message)
 		}
 	},
+	async GET_DISHES({ commit }) {
+		commit('IS_LOADING', true)
+		try {
+			let data = await firebase
+				.database()
+				.ref('dishes')
+				.once('value')
+
+			data = data.val()
+
+			let dishes = []
+
+			for (const key in data) {
+				dishes.push({ ...data[key], id: key })
+			}
+
+			commit('SET_DISHES', dishes)
+			commit('IS_LOADING', false)
+		} catch (error) {
+			console.error('Ошибка в [GET_DISHES]: ' + error.message)
+		}
+	},
 	async REGISTER_USER({ commit }, { email, password }) {
 		let user = await firebase
 			.auth()
@@ -220,9 +242,30 @@ export default {
 
 			let id = data.key
 
-			commit('PUSH_MEASURE', { title: measure.title, id })
+			commit('PUSH_MEASURE', {
+				id,
+				title: measure.title,
+				number: measure.number,
+			})
 		} catch (error) {
 			console.error('Ошибка в [ADD_MEASURE]: ' + error.message)
+		}
+	},
+	async ADD_DISH({ commit }, dish) {
+		try {
+			let data = await firebase
+				.database()
+				.ref('dishes')
+				.push(dish)
+
+			let id = data.key
+
+			commit('PUSH_DISH', {
+				id,
+				...dish,
+			})
+		} catch (error) {
+			console.error('Ошибка в [ADD_DISH]: ' + error.message)
 		}
 	},
 }

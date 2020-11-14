@@ -20,15 +20,21 @@
 			navbar,
 		},
 		methods: {
-			...mapActions(['GET_PRODUCTS', 'GET_CATEGORIES', 'GET_MEASURES']),
+			...mapActions([
+				'GET_PRODUCTS',
+				'GET_DISHES',
+				'GET_CATEGORIES',
+				'GET_MEASURES',
+			]),
 		},
 		computed: {
 			...mapGetters(['USER']),
 		},
-		mounted() {
-			this.GET_PRODUCTS()
-			this.GET_CATEGORIES()
-			this.GET_MEASURES()
+		async mounted() {
+			await this.GET_PRODUCTS()
+			await this.GET_CATEGORIES()
+			await this.GET_MEASURES()
+			await this.GET_DISHES()
 		},
 	}
 </script>
@@ -37,8 +43,16 @@
 	body {
 		background: #eee !important;
 	}
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+	}
 	.container {
-		max-width: 768px !important;
+		max-width: 800px !important;
 	}
 	/* input {
 		background: #555 !important;

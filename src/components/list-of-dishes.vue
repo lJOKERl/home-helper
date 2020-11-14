@@ -1,75 +1,87 @@
 <template>
 	<div>
-		<h3>Список блюд</h3>
-		<loader v-if="GET_LOADING_STATUS" />
-		<div
-			v-else-if="!dishes.length"
-			class="alert alert-light mt-3 text-center"
-			role="alert"
-		>
-			<b-icon icon="basket" font-scale="1.5"> </b-icon> В списке нет продуктов.
-			Вы можете их добавить.
+		<modal title="Удаление" id="delete">
+			<template v-slot:content
+				><div class="text-center d-flex  justify-content-center">
+					<b-icon
+						variant="danger"
+						font-scale="2.5"
+						class="mb-2"
+						icon="exclamation-triangle"
+					></b-icon>
+				</div>
+				<h5 class="text-center">ddd</h5>
+
+				<p class="text-center text-danger">
+					Действительно хотите удалить ед.измерения?
+				</p>
+			</template>
+			<template v-slot:footer>
+				<div class="d-flex justify-content-center">
+					<b-button pill type="submit" variant="danger" class="mr-1">
+						<b-icon icon="trash-fill" class="mr-1"></b-icon>Удалить</b-button
+					>
+					<b-button variant="outline-secondary" pill
+						><b-icon icon="x" class=""></b-icon>Отмена</b-button
+					>
+				</div>
+			</template>
+		</modal>
+
+		<div class="wrap" v-if="DISHES.length">
+			<b-list-group
+				v-for="dish in DISHES"
+				:key="dish.id"
+				@click="check($event)"
+			>
+				<b-list-group-item class="d-flex align-items-center">
+					<b-avatar class="mr-3"></b-avatar>
+					<span class="mr-auto">{{ dish.title }}</span>
+					<b-badge>{{ dish.total }}</b-badge>
+				</b-list-group-item>
+			</b-list-group>
 		</div>
 
-		<ul v-else class="list-group  my-3">
-			<li
-				v-for="dish in dishes"
-				:key="dish.id"
-				class="list-group-item d-flex justify-content-between align-items-center"
-			>
-				<div class="dish_left">
-					<img :src="dish.image" alt="" class="dish_img" />
-					<div>
-						{{ dish.title }}<br />
-						<small class="text-secondary">Стоимость: 800 руб</small>
-					</div>
-				</div>
-				<div>
-					{{ dish.price }}
-					<b-icon
-						icon="trash"
-						variant="danger"
-						class="trash_icon ml-2"
-						@click="DELETE_DISH(dish.id)"
-					>
-					</b-icon>
-				</div>
-			</li>
-		</ul>
+		<empty-list v-else>
+			<b-icon icon="emoji-neutral" font-scale="1.5" class="mr-2"> </b-icon>Нет
+			блюд. Самое время добавить!
+		</empty-list>
 	</div>
 </template>
 
 <script>
-	import { mapActions, mapState, mapGetters } from 'vuex'
-	import loader from '@/components/loader.vue'
+	import { mapGetters } from 'vuex'
+	import emptyList from '@/components/Common/empty-list.vue'
+	import modal from '@/components/Common/modal.vue'
+
 	export default {
 		name: 'listOfDishes',
-		methods: {
-			...mapActions(['GET_DISHES', 'DELETE_DISH']),
+
+		components: {
+			modal,
+			emptyList,
 		},
 		computed: {
-			...mapState(['dishes']),
-			...mapGetters(['GET_LOADING_STATUS']),
+			...mapGetters(['DISHES']),
 		},
-		components: {
-			loader,
-		},
-		mounted() {
-			this.GET_DISHES()
+		methods: {
+			check(event) {
+				console.log('click')
+				event.currentTarget.style.border = '1px solid red'
+			},
 		},
 	}
 </script>
 
 <style scoped>
-	.dish_img {
-		width: 5rem;
-		display: inline-block;
-		border-radius: 0.25rem;
-		margin-right: 0.5rem;
+	.list-group {
+		min-width: 49%;
+		margin: 0.1rem;
+		cursor: pointer;
 	}
 
-	.dish_left {
+	.wrap {
 		display: flex;
-		align-items: center;
+		flex-wrap: wrap;
 	}
 </style>

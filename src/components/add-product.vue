@@ -37,12 +37,20 @@
 			</div>
 
 			<div class="form-group">
-				<select id="formCat" class="form-control" v-model="category">
+				<select
+					id="formCat"
+					class="form-control"
+					v-model.trim="$v.category.$model"
+					:class="{ 'is-invalid': $v.price.$error }"
+				>
 					<option value="category" disabled>Выберите категорию:</option>
 					<option v-for="category in CATEGORIES" :key="category.id">
 						{{ category.title }}
 					</option>
 				</select>
+				<div class="invalid-feedback" v-if="!$v.category.required">
+					Выберите категорию
+				</div>
 			</div>
 
 			<div class="d-flex justify-content-between align-items-center">
@@ -60,7 +68,11 @@
 					</button>
 				</div>
 
-				<b-button variant="success" pill type="submit"
+				<b-button
+					variant="success"
+					pill
+					type="submit"
+					:disabled="$v.title.$invalid"
 					><b-icon icon="plus" class=""></b-icon>Добавить</b-button
 				>
 			</div>
@@ -83,6 +95,8 @@
 				price: null,
 				measure: 'шт',
 				category: 'овощи',
+				step: null,
+				value: null,
 				len: 4,
 			}
 		},
@@ -94,6 +108,9 @@
 			price: {
 				required,
 				numeric,
+			},
+			category: {
+				required,
 			},
 		},
 		components: {
@@ -115,9 +132,17 @@
 			},
 			send() {
 				if (!this.$v.title.$invalid) {
+					if (this.measure == 'шт' || this.measure == 'уп') {
+						this.step = this.value = 1
+					} else {
+						this.step = this.value = 50
+					}
+
 					this.ADD_PRODUCT({
 						title: this.title,
-						price: this.price,
+						price: parseInt(this.price),
+						step: this.step,
+						value: this.value,
 						measure: this.measure,
 						category: this.category,
 					})
