@@ -219,6 +219,20 @@ export default {
 			console.error('Ошибка в [DELETE_MEASURE]: ' + error.message)
 		}
 	},
+	async DELETE_DISH({ commit }, id) {
+		try {
+			firebase
+				.database()
+				.ref('dishes')
+				.child(id)
+				.remove()
+
+			commit('DELETE_DISH_BY_ID', id)
+			commit('IS_LOADING', false)
+		} catch (error) {
+			console.error('Ошибка в [DELETE_DISH]: ' + error.message)
+		}
+	},
 	async ADD_CATEGORY({ commit }, category) {
 		try {
 			let data = await firebase

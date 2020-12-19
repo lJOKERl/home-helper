@@ -15,6 +15,7 @@ const store = new Vuex.Store({
 		measures: [],
 		loading: true,
 		user: null,
+		ingredients: [],
 	},
 	getters,
 	mutations,

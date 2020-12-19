@@ -7,21 +7,29 @@ import { router } from './router'
 import firebase from 'firebase'
 import Vuelidate from 'vuelidate'
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+import Element from 'element-ui'
+
+Vue.use(Element)
+
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(Vuelidate)
 
-import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
+import './assets/element-variables.scss'
+import './assets/style/style.css'
 
 Vue.config.productionTip = false
+
+router.beforeEach((to, from, next) => {
+	document.title = to.meta.title
+	next()
+})
 
 new Vue({
 	render: (h) => h(App),
 	store,
 	router,
+
 	created() {
 		// Initialize Firebase
 		firebase.initializeApp({

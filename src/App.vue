@@ -1,24 +1,42 @@
 <template>
-	<div>
-		<navbar />
-		<div class="container" id="app">
+	<div class="container">
+		<div id="app">
+			<div class="flex justify-content-space-between align-items-center header">
+				<el-avatar size="small" icon="el-icon-user-solid"></el-avatar>
+				<i
+					class="el-icon-s-fold"
+					id="burger"
+					style="cursor: pointer; font-size: 1.25rem"
+				></i>
+				<navbar />
+			</div>
+			<div class="nav">
+				<el-page-header
+					@back="$router.go(-1)"
+					title=""
+					:content="this.$route.meta.title"
+				>
+				</el-page-header>
+			</div>
+
 			<router-view></router-view>
 		</div>
+
+		<bottom-menu />
 	</div>
 </template>
 
 <script>
 	import 'bootstrap/dist/css/bootstrap.css'
 	import 'bootstrap-vue/dist/bootstrap-vue.css'
-	import navbar from '@/components/Common/navbar.vue'
 	import { mapActions, mapGetters } from 'vuex'
+	import navbar from '@/components/Common/navbar.vue'
+	import bottomMenu from '@/components/Common/menu.vue'
 
 	export default {
 		name: 'App',
-		components: {
-			// topMenu,
-			navbar,
-		},
+		components: { navbar, bottomMenu },
+
 		methods: {
 			...mapActions([
 				'GET_PRODUCTS',
@@ -26,43 +44,26 @@
 				'GET_CATEGORIES',
 				'GET_MEASURES',
 			]),
+			handleClose(done) {
+				done()
+			},
 		},
 		computed: {
-			...mapGetters(['USER']),
+			...mapGetters(['USER', 'LOADING']),
 		},
-		async mounted() {
-			await this.GET_PRODUCTS()
-			await this.GET_CATEGORIES()
-			await this.GET_MEASURES()
-			await this.GET_DISHES()
+		mounted() {
+			this.GET_PRODUCTS()
+			this.GET_CATEGORIES()
+			this.GET_MEASURES()
+			this.GET_DISHES()
 		},
 	}
 </script>
 
 <style>
-	body {
-		background: #eee !important;
-	}
-	input[type='number'] {
-		-moz-appearance: textfield;
-	}
-
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-	}
-	.container {
-		max-width: 800px !important;
-	}
-	/* input {
-		background: #555 !important;
-	}
-	li {
-		background: #555 !important;
-	} */
-	@media (max-width: 600px) {
-		.show-icon {
-			display: none;
-		}
+	.nav {
+		position: absolute;
+		top: 0;
+		padding: 12px;
 	}
 </style>

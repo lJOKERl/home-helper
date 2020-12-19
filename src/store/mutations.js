@@ -8,6 +8,9 @@ export default {
 	PUSH_MEASURE(state, payload) {
 		state.measures.push(payload)
 	},
+	PUSH_INGREDIENT(state, payload) {
+		state.ingredients.push(payload)
+	},
 	PUSH_DISH(state, payload) {
 		state.dishes.push(payload)
 	},
@@ -49,6 +52,19 @@ export default {
 	DELETE_MEASURE_BY_ID(state, id) {
 		let newArr = state.measures.filter((el) => el.id !== id)
 		state.measures = newArr
+	},
+	DELETE_DISH_BY_ID(state, id) {
+		let newArr = state.dishes.filter((el) => el.id !== id)
+		state.dishes = newArr
+	},
+	DELETE_INGREDIENT_BY_ID(state, id) {
+		let newArr = state.ingredients.filter((el) => el.id !== id)
+		state.ingredients = newArr
+	},
+	UPDATE_INGREDIENT_BY_ID(state, payload) {
+		let elem = state.ingredients.find((el) => el.id == payload.id)
+
+		elem.value = payload.num
 	},
 	SET_USER(state, payload) {
 		state.user = payload

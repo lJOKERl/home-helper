@@ -3,19 +3,19 @@
 		<el-card
 			shadow="hover"
 			class="mb-2 grey"
-			v-for="item in catList"
+			v-for="item in measuresList"
 			:key="item.id"
 			:body-style="{ padding: '12px' }"
 		>
 			<div class="flex justify-content-space-between align-items-center">
-				<span class="list_title">{{ item.title }}</span>
+				<el-avatar class="primary"> {{ item.title }} </el-avatar>
 
 				<span>
 					<list-actions
 						:id="item.id"
 						:title="item.title"
 						@editElem="edit"
-						@deleteElem="show"
+						@deleteElem="show($event)"
 					/>
 				</span>
 			</div>
@@ -44,7 +44,7 @@
 	import deleteModal from '@/components/Common/Modals/delete-modal.vue'
 
 	export default {
-		name: 'categoriesList',
+		name: 'measuresList',
 		data() {
 			return {
 				title: '',
@@ -59,18 +59,18 @@
 			deleteModal,
 		},
 		computed: {
-			...mapGetters(['LOADING', 'CATEGORIES']),
-			catList() {
-				return Object.assign([], { ...this.CATEGORIES }).reverse()
+			...mapGetters(['LOADING', 'MEASURES']),
+			measuresList() {
+				return Object.assign([], { ...this.MEASURES }).reverse()
 			},
 		},
 		methods: {
-			...mapActions(['DELETE_CATEGORY', 'UPDATE_CATEGORY']),
+			...mapActions(['DELETE_MEASURE', 'UPDATE_MEASURE']),
 			edit(id) {
 				this.showEditModal = true
-				let category = this.CATEGORIES.find((el) => el.id === id)
+				let measure = this.MEASURES.find((el) => el.id === id)
 
-				this.title = category.title
+				this.title = measure.title
 				this.currentID = id
 			},
 			show({ title, id }) {
@@ -79,11 +79,11 @@
 				this.currentID = id
 			},
 			remove() {
-				this.DELETE_CATEGORY(this.currentID)
+				this.DELETE_MEASURE(this.currentID)
 				this.showDeleteModal = false
 			},
 			send() {
-				this.UPDATE_CATEGORY({
+				this.UPDATE_MEASURE({
 					title: this.title,
 					id: this.currentID,
 				})
@@ -91,3 +91,10 @@
 		},
 	}
 </script>
+
+<style scoped>
+	.danger {
+		background: red !important;
+		font-size: 1.5em !important;
+	}
+</style>

@@ -31,23 +31,20 @@
 		>
 			<span class="subtitle">Список категорий</span>
 
-			<el-tag type="info" v-show="CATEGORIES" size="mini" effect="dark"
-				>{{ len }}
-			</el-tag>
+			<el-tag type="info" size="mini" effect="dark">{{ len }} </el-tag>
 		</div>
-		<categories-list />
+		<measures-list />
 	</div>
 </template>
 
 <script>
 	import { mapActions, mapGetters } from 'vuex'
-	import categoriesList from '@/components/Categories/categories-list.vue'
+	import measuresList from '@/components/Measures/measures-list.vue'
 
 	export default {
-		name: 'add-caterory',
+		name: 'addMeasure',
 		data() {
 			return {
-				curentID: null,
 				validate: {
 					title: null,
 				},
@@ -60,26 +57,37 @@
 						},
 					],
 				},
+
+				curentID: null,
+				number: null,
 			}
 		},
 
 		components: {
-			categoriesList,
+			measuresList,
 		},
 		computed: {
-			...mapGetters(['LOADING', 'CATEGORIES']),
+			...mapGetters(['MEASURES']),
 			len() {
-				return Object.keys(this.CATEGORIES).length
+				return Object.keys(this.MEASURES).length
 			},
 		},
 		methods: {
-			...mapActions(['ADD_CATEGORY']),
+			...mapActions(['ADD_MEASURE']),
+
 			send(formName) {
+				if (this.validate.title == 'шт' || this.validate.title == 'уп') {
+					this.number = 1
+				} else {
+					this.number = 50
+				}
+
 				this.$refs[formName].validate((valid) => {
 					if (valid) {
-						this.ADD_CATEGORY({
+						this.ADD_MEASURE({
 							id: this.curentID,
-							title: this.validate.title.toLowerCase(),
+							title: this.validate.title,
+							number: this.number,
 						})
 
 						this.$refs[formName].resetFields()
@@ -95,5 +103,10 @@
 <style scoped>
 	.add {
 		padding: 20px 25px;
+		background: #fff;
+	}
+
+	.white {
+		background: #fff;
 	}
 </style>

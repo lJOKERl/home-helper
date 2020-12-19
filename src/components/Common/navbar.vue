@@ -1,48 +1,62 @@
 <template>
-	<div>
-		<b-navbar toggleable="lg" type="dark" variant="dark" class="mb-5">
-			<b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+	<el-menu id="navbar" mode="horizontal">
+		<el-submenu index="3">
+			<template slot="title"
+				><i class="el-icon-document-copy"></i> Списки</template
+			>
+			<el-menu-item index="3-1"
+				><router-link to="/list-of-dishes"
+					><i class="el-icon-tableware"></i>Блюда</router-link
+				></el-menu-item
+			>
+			<el-menu-item index="3-2"
+				><router-link to="/products-list"
+					><i class="el-icon-shopping-bag-2"></i>Продукты</router-link
+				></el-menu-item
+			>
+			<el-menu-item index="3-3"
+				><router-link to="/categories-list"
+					><i class="el-icon-warning-outline"></i>Категории</router-link
+				></el-menu-item
+			>
+			<el-menu-item index="3-4"
+				><router-link to="/measures-list"
+					><i class="el-icon-warning-outline"></i>Ед.измерения</router-link
+				></el-menu-item
+			>
+			<el-menu-item index="3-4"
+				><router-link to="/measures-list"
+					><i class="el-icon-warning-outline"></i>Категории</router-link
+				></el-menu-item
+			>
+		</el-submenu>
 
-			<b-collapse id="nav-collapse" is-nav>
-				<!-- <b-navbar-nav>
-					<b-nav-item to="/add-product">Продукты</b-nav-item>
-				</b-navbar-nav> -->
-
-				<!-- Right aligned nav items -->
-				<b-navbar-nav class="ml-auto">
-					<li class="nav-item">
-						<router-link class="nav-link" to="/add-new-dish"
-							>Добавить блюдо</router-link
-						>
-					</li>
-					<li class="nav-item">
-						<router-link class="nav-link" to="/list-of-dishes"
-							>Список блюд</router-link
-						>
-					</li>
-					<b-nav-item-dropdown right>
-						<!-- Using 'button-content' slot -->
-						<template #button-content>
-							<b-icon icon="plus-circle" class="mr-1"></b-icon>
-							Добавить
-						</template>
-						<b-dropdown-item to="/add-product"
-							><b-icon icon="bag-check" class="mr-2"></b-icon
-							>Продукт</b-dropdown-item
-						>
-						<b-dropdown-item to="/add-category"
-							><b-icon icon="folder-plus" class="mr-2"></b-icon
-							>Категорию</b-dropdown-item
-						>
-						<b-dropdown-item to="/add-measure"
-							><b-icon icon="info-square" class="mr-2"></b-icon
-							>Ед.Измерения</b-dropdown-item
-						>
-					</b-nav-item-dropdown>
-				</b-navbar-nav>
-			</b-collapse>
-		</b-navbar>
-	</div>
+		<el-submenu index="4">
+			<template slot="title"
+				><i class="el-icon-circle-plus-outline"></i> Добавить</template
+			>
+			<el-menu-item index="4-1"
+				><router-link to="/add-new-dish"
+					><i class="el-icon-tableware"></i>Блюдо</router-link
+				></el-menu-item
+			>
+			<el-menu-item index="4-2"
+				><router-link to="/add-product"
+					><i class="el-icon-shopping-bag-2"></i>Продукт</router-link
+				></el-menu-item
+			>
+			<el-menu-item index="4-3"
+				><router-link to="/add-category"
+					><i class="el-icon-folder-add"></i>Категорию</router-link
+				></el-menu-item
+			>
+			<el-menu-item index="4-4"
+				><router-link to="/add-measure"
+					><i class="el-icon-warning-outline"></i>Ед.Измерения</router-link
+				></el-menu-item
+			>
+		</el-submenu>
+	</el-menu>
 </template>
 
 <script>
